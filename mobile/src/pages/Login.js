@@ -18,9 +18,16 @@ export default function Login({ navigation }){
     const [techs, setTechs] = useState('')
 
     useEffect(() => {
-        AsyncStorage.getItem('user').then(user =>{
-            navigation.navigate('List');
-        });
+        try{
+            AsyncStorage.getItem('user').then(user =>{
+                if (user){
+                    navigation.navigate('List');
+                }
+            });
+        }
+        catch(error){
+            alert(error);
+        }        
     }, []);
 
     async function handelSubmit(){
@@ -29,7 +36,6 @@ export default function Login({ navigation }){
         });
 
         const { _id } = response.data;
-
         await AsyncStorage.setItem('user', _id);
         await AsyncStorage.setItem('techs', techs);
         navigation.navigate('List');
@@ -59,7 +65,7 @@ export default function Login({ navigation }){
                     value={techs}
                     onChangeText={setTechs} />
 
-                <TouchableOpacity onPress={handelSubmit} style={styles.button}>
+                <TouchableOpacity onPress={() => handelSubmit()} style={styles.button}>
                     <Text style={styles.buttonText}>Encontrar spots</Text>
                 </TouchableOpacity>
             </View>

@@ -19,6 +19,7 @@
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.9.3",
     "react-navigation-transitions": "^1.0.12",
+    "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
